@@ -135,7 +135,9 @@ def dehaze_raw(I, tmin = 0.2, Amax = 220, w = 15, p = 0.0001, omega = 0.95, guid
 
     rawt = refinedt = np.maximum(rawt, tmin)
 
-    #if guided
+    if guided:
+        normI = (I - I.min()) / (I.max() - I.min())
+        refinedt = guided_filter(normI, refinedt, r, eps)
 
     print 'refined transmission rate',
     print 'between [%.4f, %.4f]' % (refinedt.min(), refinedt.max())
@@ -180,4 +182,4 @@ def dehaze(im, tmin = 0.2, Amax = 220, w = 15, p = 0.0001, omega = 0.95, guided 
 
     #white * rawt from [0, 1] to [0, L - 1]
     #return [to_img(raw) for raw in (Idark, white * rawt, white * refinedt, get_radiance(I, A, rawt), get_radiance(I, A, refinedt))]
-    return [to_img(get_radiance(I, A, rawt))]
+    return [to_img(get_radiance(I, A, refinedt))]
