@@ -108,7 +108,7 @@ cov_Ip = corr_Ip - mean_I.* mean_p
 
 3.
 a = cov_Ip ./ (var_I + sigma)
-b =mean_p - a.* meanI 
+b = mean_p - a.* meanI 
 
 4.
 mean_a = fmean(a)

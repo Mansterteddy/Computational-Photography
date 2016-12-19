@@ -13,12 +13,13 @@ def get_filenames():
     """
     #get current file path
     file_dir = os.path.dirname(os.path.realpath(__file__))
-    #print "file_dir:", file_dir
+
     #find parent dir
     parent_dir, _ = os.path.split(file_dir)
-    #print "parent_dir: ", parent_dir, " _: ", _
+
     #test image folder path 
     src_path = os.path.join(parent_dir, SRC_DIR)
+  
     #result image folder path
     dest_path = os.path.join(parent_dir, DEST_DIR)
 
@@ -26,11 +27,10 @@ def get_filenames():
     for name in IMG_NAMES:
         base, ext = os.path.splitext(name)
         tempname = base + '-%s' + ext
-        #print tempname
         filenames.append((os.path.join(src_path, name), os.path.join(dest_path, tempname)))
     
-    #print "filename: ", filenames
     return filenames
+
 """
 if __name__ == '__main__':
     filenames = get_filenames()
