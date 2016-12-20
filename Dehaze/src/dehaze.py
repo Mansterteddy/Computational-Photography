@@ -21,6 +21,8 @@ def get_dark_channel(I, w):
     Return:
 
     An  M * N array for the dark channel prior ([0, L - 1])
+    
+    dark channel 不是某个像素的rgb channel最小值，而是包含某个像素的窗口中的最小值。
     """
 
     M, N, _ = I.shape
