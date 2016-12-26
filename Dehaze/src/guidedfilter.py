@@ -31,6 +31,7 @@ def boxfilter(I, r):
 
     sumY = np.cumsum(I, axis = 0)
 
+    #dest中每一个位置的value，都是I中每一个元素，围绕窗口，计算得到的值
     dest[: r + 1] = sumY[r: 2 * r + 1]
     dest[r + 1: M - r] = sumY[2 * r + 1:] - sumY[: M - 2 * r - 1]
     #np.tile 将后面第一个参数，复制成以第二个参数为格式的数组
@@ -60,6 +61,7 @@ def guided_filter(I, p, r = 40, eps = 1e-3):
     
     The guided filter
     """
+    #滑动窗口法，保存对窗口元素加权平均时，矩阵中每个元素位置上需要除以的值
     M, N = p.shape 
     base = boxfilter(np.ones((M, N)), r)
 

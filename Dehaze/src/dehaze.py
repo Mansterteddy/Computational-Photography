@@ -168,7 +168,7 @@ def dehaze(im, tmin = 0.2, Amax = 220, w = 15, p = 0.0001, omega = 0.95, guided 
     Idark, A, rawt, refinedt = dehaze_raw(I, tmin, Amax, w, p, omega, guided, r, eps)
 
     #Return a full array with the same shape and type as a given array, value is L - 1
-    white = np.full_like(Idark, L - 1)
+    #white = np.full_like(Idark, L - 1)
 
     def to_img(raw):
         # threshold to [0, L - 1] 
