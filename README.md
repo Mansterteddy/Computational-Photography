@@ -29,4 +29,12 @@
 
 2、Matting算法；
 
+3、HOG算法；
+
+4、Dynamic Registration算法；
+
+5、Alpha Blending算法；
+
+6、Pencil Drawing算法；
+
 更多的项目待更新中...
