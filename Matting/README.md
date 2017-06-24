@@ -16,5 +16,5 @@ matting研究的领军人物有：Adobe的Wang Jue，Face++的Sun Jian，Stanfor
 
 经典方法包括：Closed-form matting，KNN matting，Possion Matting等。
 
-目前只实现了tri-matting，更多的方法待添加中...
+
 

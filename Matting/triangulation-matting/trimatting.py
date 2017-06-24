@@ -1,5 +1,6 @@
 #coding = utf-8
 
+#Computing Matte using SVD, can be used parallel computing
 from pylab import *
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,12 +9,12 @@ from scipy.misc import imread
 import matplotlib.image as mpimg
 import matplotlib.pyplot as plt
 from PIL import Image
+import time
 
 #b1, b2 as example, two images, for the same foreground, fg and alpha channel are all same
 #fg + (1 - alpha) * b_1 = c_1
 #fg + (1 - alpha) * b_2 = c_2
-#There are three color channel, so there is 6 equations, take it into matrix form, we want to compute fg, alpha.
-#Then the composite image is fg + (1 - alpha) * new_backgroud
+#There are three color channel, so there is 6 equations, take it into matrix form
 
 def matting(b1, b2, c1, c2):
         """
@@ -36,7 +37,6 @@ def matting(b1, b2, c1, c2):
 
         img_shape = b1.shape 
         fg = np.zeros(img_shape)
-        #img_shape includes width * height * 3, alpha only need width and height, so range from 0 to 1
         alpha = np.zeros(img_shape[: 2])
 
         matrix = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1], [1, 0, 0], [0, 1, 0], [0, 0, 1]])
@@ -61,11 +61,11 @@ def matting(b1, b2, c1, c2):
                 #hstack: Take a sequence of arrays and stack them horizontally to make a single array.
                 A = np.hstack((matrix, -1 * a))
                 #pinv: calculate the pseudo-inverse of a matrix, assume A is singular, AXA = A X is A's pseudo-inverse
+                #Calculate the generalized inverse of a matrix using its singular-value decomposition (SVD) and including all large singular values.
                 #clip: Limit the values in an array
                 x = np.clip(np.dot(np.linalg.pinv(A), b), 0.0, 1.0)
                 fg[i, j] = np.array([x[0][0], x[1][0], x[2][0]])
-                #Matrix dim is 6 * 4, 4 * 1, 6 * 1, alpha is the 4th result in array.
-                alpha[i, j] = x[3][0]
+                alpha[i, j] = x[3]
         return fg, alpha
 
 
@@ -93,6 +93,8 @@ def multiply_alpha(alpha, b):
 
 
 if __name__ == "__main__":
+    start_time = time.time()
+
     window = np.array(Image.open('window.jpg')) / 255.0
     
     b1 = np.array(Image.open('flowers-backA.jpg')) / 255.0
@@ -109,3 +111,7 @@ if __name__ == "__main__":
     composite = fg + b
     plt.show(imshow(composite))
     imsave('flower-composite.jpg', composite)
+    
+    end_time = time.time()
+
+    print "Time: ", end_time - start_time
