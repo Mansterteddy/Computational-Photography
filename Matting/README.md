@@ -12,8 +12,6 @@ $$
 
 后面的研究，集中于单张图片的matting，不引入其他信息。
 
-matting研究的领军人物有：Adobe的Wang Jue，Face++的Sun Jian，Stanford的Chen Qifeng等。
-
 经典方法包括：Closed-form matting，KNN matting，Possion Matting等。
 
 

@@ -19,9 +19,7 @@
 
 计算摄影学的目标，就是在不重新进行物理拍摄的条件下，对图像内容重新编辑和渲染，得到具备真实感的的图像，甚至于以假乱真。
 
-此领域属于新生领域，在国内，领军人物有山东大学的Chen Baoquan，Face++的Sun Jian，还有FAIR的He Kaiming等。
-
-相关论文主要发布在SIGGRAPH、SIGGRAPH ASIA、CVPR、ICCV、ECCV等会议上。
+此领域相关论文主要发布在SIGGRAPH、SIGGRAPH ASIA、CVPR、ICCV、ECCV等会议上。
 
 在此目录下，我实现了一些计算摄影学相关的小项目，目前包括：
 
